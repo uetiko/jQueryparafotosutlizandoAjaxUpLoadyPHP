@@ -1,0 +1,44 @@
+body
+{
+    background-color: #fff;
+    color: #000;
+    font: normal 12px 'Arial', Verdana, serif, sans-serif, monospace !important;
+    line-height: 1;
+    margin: 0 auto;
+    overflow-y: scroll;
+}
+
+footer{
+	text-align:center;
+	font-size:0.8em;
+	padding: 10px 0;
+}
+
+header h2{
+	text-align: center;
+}
+
+#wraper{
+	margin:0 auto;
+	overflow:hidden;
+	width:960px;
+	height:auto;
+}
+
+.loaderAjax{
+	display: none;
+}
+
+#contenedorImagen .fotografia{
+	margin: 20px auto;
+	width:120px;
+	height:120px;
+	border: 1px solid #ccc;
+	-moz-border-radius: 8px 8px 8px 8px;
+	-webkit-border-radius: 8px 8px 8px 8px;
+	border-radius: 8px 8px 8px 8px;
+}
+
+#wraper .contentLayout{
+    text-align: center;
+}

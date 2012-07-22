@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+ 
+<html lang="es">
+ 
+<head>
+<title>:: upLoad de Archivos con ajax ::</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="css/estilos.css" type="text/css" />
+<script src="js/jquery-1.7.2.min.js"></script>
+<script src="js/AjaxUpload.2.0.min.js"></script>
+
+</head>
+<script>
+    $(function() {
+    	// Botón para subir la firma
+		var btn_firma = $('#addImage'), interval;
+			new AjaxUpload('#addImage', {
+				action: 'includes/uploadFile.php',
+				onSubmit : function(file , ext){
+					if (! (ext && /^(jpg|png)$/.test(ext))){
+						// extensiones permitidas
+						alert('Sólo se permiten Imagenes .jpg o .png');
+						// cancela upload
+						return false;
+					} else {
+						$('#loaderAjax').show();
+						btn_firma.text('Espere por favor');
+						this.disable();
+					}
+				},
+				onComplete: function(file, response){
+					btn_firma.text('Cambiar Imagen');
+					
+					respuesta = $.parseJSON(response);
+
+					if(respuesta.respuesta == 'done'){
+						$('#fotografia').removeAttr('scr');
+						$('#fotografia').attr('src','images/' + respuesta.fileName);
+						$('#loaderAjax').show();
+						// alert(respuesta.mensaje);
+					}
+					else{
+						alert(respuesta.mensaje);
+					}
+						
+					$('#loaderAjax').hide();	
+					this.enable();	
+				}
+		});
+    });
+</script>
+<body>
+	<div id="wraper">
+	    <header class="headerLayout">
+	      <h2>upLoad de Archivos con Ajax</h2>
+	    </header>
+	    <section class="contentLayout" id="contentLayout">
+	    	<div id="contenedorImagen">
+	    		<img id="fotografia" class="fotografia" src="images/nofoto.jpg">
+	    	</div>
+
+	    	<button class="boton" id="addImage">Cambiar Imagen</button>
+
+	    	<div class="loaderAjax" id="loaderAjax">
+		    	<img src="images/default-loader.gif">
+	       		<span>Publicando Fotografía...</span>
+		    </div>
+
+	    </section>
+ 	</div>
+  	<footer>
+	        Powered by Luis Fernando Cázares Bulbarela || 2012
+	</footer>
+</body>
+</html>
